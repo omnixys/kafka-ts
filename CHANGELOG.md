@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [2.2.2](https://github.com/omnixys/kafka/compare/v2.2.1...v2.2.2) (2026-07-03)
+
+### Deps
+
+* **Deps:** update omnixys dependencies ([](https://github.com/omnixys/kafka/commit/e02cbd305e634be6b416a21ce031f9f5a1844a57))
+
 ## [2.2.1](https://github.com/omnixys/kafka/compare/v2.2.0...v2.2.1) (2026-07-03)
 
 ### Topic
