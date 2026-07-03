@@ -23,6 +23,7 @@ import type {
   EventRoleRemovedDTO,
   EventUpdatedDTO,
   GuestNotificationDTO,
+  InvitationSeatingInfoUpdatedDTO,
   SendAuthLinkDTO,
   TokenDTO,
   UserActionDTO,
@@ -84,6 +85,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.invitation.addGuestId]: AddGuestIdToInvitationDTO;
   [KafkaTopics.invitation.deleteUserInvitations]: UserIdDTO;
   [KafkaTopics.invitation.deleteEventInvitations]: EventIdsDTO;
+  [KafkaTopics.invitation.seatingInfoUpdated]: InvitationSeatingInfoUpdatedDTO;
 
   [KafkaTopics.logstream.log]: LogDTO;
   [KafkaTopics.logstream.restart]: ActorIdDTO;

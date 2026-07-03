@@ -74,6 +74,7 @@ export const KafkaTopics = {
     deleteUserInvitations: `authentication.userDelete.invitation`,
     addGuestId: `ticket.addGuestId.invitation`,
     deleteEventInvitations: "event.eventDelete.invitation",
+    seatingInfoUpdated: "invitation.seating.info.updated",
   },
 
   logstream: {
