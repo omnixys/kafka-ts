@@ -43,7 +43,7 @@
   },
   "keywords": [
     "omnixys",
-    "contracts",
+    "kafka",
     "microservices"
   ],
   "license": "GPL-3.0-or-later",
@@ -54,7 +54,7 @@
     "@nestjs/core": "^11.1.17",
     "@omnixys/cache": "^2.0.2",
     "@omnixys/context": "^2.0.0",
-    "@omnixys/contracts": "^2.1.0",
+    "@omnixys/contracts": "^2.1.3",
     "@omnixys/logger": "^2.0.1",
     "@omnixys/observability": "^2.0.0",
     "@semantic-release/changelog": "^6.0.3",
