@@ -56,6 +56,8 @@ export const KafkaTopics = {
     updated: "event.updated",
     roleAssigned: "event.role.assigned",
     roleRemoved: "event.role.removed",
+    roleDefinitionChanged: "event.role.definition.changed",
+    userAccessChanged: "event.user.access.changed",
     ownerChanged: "event.owner.changed",
     deleted: "event.deleted",
   },
@@ -66,6 +68,7 @@ export const KafkaTopics = {
 
     sendCredentials: "notification.sendCredentials.gateway",
     createWhatsappMessage: "whatsapp.message.created",
+    deliveryStatus: "gateway.delivery.status",
   },
 
   invitation: {
@@ -126,10 +129,25 @@ export const KafkaTopics = {
     createProviderUser: "authentication.provider.user",
   },
 
-  whatsapp: {
-    outgoing: "notification.outgoing.whatsapp",
-    retry: "notification.retry.whatsapp",
-    dlq: "notification.dlq.whatsapp",
+  conversation: {
+    guestCreated: "conversation.guest.created",
+    agentReplied: "conversation.agent.replied",
+    guestReplied: "conversation.guest.replied",
+    chatAssigned: "conversation.chat.assigned",
+    chatClosed: "conversation.chat.closed",
+    channelMessage: "conversation.channel.message",
+    internalCreated: "conversation.internal.created",
+    internalMessage: "conversation.internal.message",
+    internalRead: "conversation.internal.read",
+    deliveryUpdate: "conversation.delivery.update",
+    conversationMapped: "conversation.mapped",
+    escalated: "conversation.escalated",
+  },
+
+  email: {
+    inboundReceived: "email.inbound.received",
+    outboundSend: "email.outbound.send",
+    bounce: "email.bounce",
   },
 } as const;
 
@@ -284,19 +302,12 @@ export const KafkaTopicMetadataRegistry = {
       consumers: ["logstream"],
     },
   },
-  whatsapp: {
-    retry: {
-      owner: "notification",
-      description: "Retry queue for outbound WhatsApp notifications.",
-      policy: "retry",
-      producers: ["notification"],
-      consumers: ["notification"],
-    },
-    dlq: {
-      owner: "notification",
-      description: "Dead-letter queue for failed WhatsApp notifications.",
-      policy: "dlq",
-      producers: ["notification"],
+  gateway: {
+    deliveryStatus: {
+      owner: "gateway",
+      description: "Delivery status updates from the Communication Gateway.",
+      policy: "default",
+      producers: ["gateway"],
       consumers: ["notification"],
     },
   },

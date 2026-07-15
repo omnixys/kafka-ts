@@ -7,33 +7,45 @@
 import type {
   ActorIdDTO,
   AddGuestIdToInvitationDTO,
+  ConversationChannelMessageDTO,
+  ConversationChatAssignedDTO,
+  ConversationChatClosedDTO,
+  ConversationCreatedDTO,
   CreateEventAddressDTO,
   CreateGuestDTO,
   CreateSeatDTO,
   CreateUserAddressDTO,
   CreateUserProviderDTO,
   CreateUserWithInvitationIdDTO,
+  DeliveryStatusDTO,
+  EmailOutboundDTO,
+  EmailReceivedDTO,
+  EscalationDTO,
   EventCancelNotificationDTO,
   EventCreatedDTO,
   EventIdsDTO,
   EventMediaUploadedDTO,
   EventMilestoneRecordedDTO,
   EventOwnerChangedDTO,
+  EventAccessDTO,
   EventRoleAssignedDTO,
+  EventRoleDefinitionChangedDTO,
   EventRoleRemovedDTO,
   EventUpdatedDTO,
   GuestNotificationDTO,
+  InternalConversationCreatedDTO,
+  InternalMessageSentDTO,
+  InternalReadReceiptDTO,
   InvitationSeatingInfoUpdatedDTO,
+  LogDTO,
   SendAuthLinkDTO,
+  SupportMessageReceivedDTO,
   TokenDTO,
   UserActionDTO,
   UserCredentialsDTO,
   UserIdDTO,
   UserTokenDTO,
-  WhatsAppDLQDTO,
   WhatsAppMessageDTO,
-  WhatsappOutgoingDTO,
-  LogDTO,
   UserIdListDTO,
   CreatePlusOneAccountDTO,
 } from "@omnixys/contracts";
@@ -72,6 +84,8 @@ export interface KafkaEventRegistry {
   [KafkaTopics.event.updated]: EventUpdatedDTO;
   [KafkaTopics.event.roleAssigned]: EventRoleAssignedDTO;
   [KafkaTopics.event.roleRemoved]: EventRoleRemovedDTO;
+  [KafkaTopics.event.roleDefinitionChanged]: EventRoleDefinitionChangedDTO;
+  [KafkaTopics.event.userAccessChanged]: EventAccessDTO;
   [KafkaTopics.event.ownerChanged]: EventOwnerChangedDTO;
   [KafkaTopics.event.deleted]: EventIdsDTO;
 
@@ -79,6 +93,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.gateway.shutdown]: ActorIdDTO;
   [KafkaTopics.gateway.sendCredentials]: UserCredentialsDTO;
   [KafkaTopics.gateway.createWhatsappMessage]: WhatsAppMessageDTO;
+  [KafkaTopics.gateway.deliveryStatus]: DeliveryStatusDTO;
 
   [KafkaTopics.invitation.restart]: ActorIdDTO;
   [KafkaTopics.invitation.shutdown]: ActorIdDTO;
@@ -119,7 +134,20 @@ export interface KafkaEventRegistry {
   [KafkaTopics.user.shutdown]: ActorIdDTO;
   [KafkaTopics.user.restart]: ActorIdDTO;
 
-  [KafkaTopics.whatsapp.outgoing]: WhatsappOutgoingDTO;
-  [KafkaTopics.whatsapp.retry]: WhatsappOutgoingDTO;
-  [KafkaTopics.whatsapp.dlq]: WhatsAppDLQDTO;
+  [KafkaTopics.conversation.guestCreated]: ConversationCreatedDTO;
+  [KafkaTopics.conversation.agentReplied]: SupportMessageReceivedDTO;
+  [KafkaTopics.conversation.guestReplied]: SupportMessageReceivedDTO;
+  [KafkaTopics.conversation.chatAssigned]: ConversationChatAssignedDTO;
+  [KafkaTopics.conversation.chatClosed]: ConversationChatClosedDTO;
+  [KafkaTopics.conversation.channelMessage]: ConversationChannelMessageDTO;
+  [KafkaTopics.conversation.internalCreated]: InternalConversationCreatedDTO;
+  [KafkaTopics.conversation.internalMessage]: InternalMessageSentDTO;
+  [KafkaTopics.conversation.internalRead]: InternalReadReceiptDTO;
+  [KafkaTopics.conversation.deliveryUpdate]: DeliveryStatusDTO;
+  [KafkaTopics.conversation.conversationMapped]: ConversationCreatedDTO;
+  [KafkaTopics.conversation.escalated]: EscalationDTO;
+
+  [KafkaTopics.email.inboundReceived]: EmailReceivedDTO;
+  [KafkaTopics.email.outboundSend]: EmailOutboundDTO;
+  [KafkaTopics.email.bounce]: DeliveryStatusDTO;
 }
