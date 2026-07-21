@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.1.1](https://github.com/omnixys/kafka/compare/v3.1.0...v3.1.1) (2026-07-21)
+
+### Tsconfig
+
+* **Tsconfig:** Update tsconfig.json ([](https://github.com/omnixys/kafka/commit/22b234851d04f27c49fc471639c1ee8ca416a31c))
+
 ## [3.1.0](https://github.com/omnixys/kafka/compare/v3.0.0...v3.1.0) (2026-07-21)
 
 ### Topic
