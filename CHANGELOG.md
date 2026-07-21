@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.1.0](https://github.com/omnixys/kafka/compare/v3.0.0...v3.1.0) (2026-07-21)
+
+### Topic
+
+* **Topic:** add KafkaTopics.user.changedProjection ([](https://github.com/omnixys/kafka/commit/624d9224feb98ac5cfec508c00a1326d8957076e))
+
 ## [3.0.0](https://github.com/omnixys/kafka/compare/v2.2.2...v3.0.0) (2026-07-15)
 
 ### Update
