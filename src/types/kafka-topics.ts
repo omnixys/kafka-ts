@@ -127,6 +127,7 @@ export const KafkaTopics = {
     createUser: "authentication.create.user",
     createGuest: "authentication.createGuest.user",
     createProviderUser: "authentication.provider.user",
+    changedProjection: "user.changed.projection",
   },
 
   conversation: {

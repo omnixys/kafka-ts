@@ -48,6 +48,7 @@ import type {
   WhatsAppMessageDTO,
   UserIdListDTO,
   CreatePlusOneAccountDTO,
+  UserProjectionChangedDTO,
 } from "@omnixys/contracts";
 import { KafkaTopics } from "./kafka-topics.js";
 
@@ -133,6 +134,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.user.createProviderUser]: CreateUserProviderDTO;
   [KafkaTopics.user.shutdown]: ActorIdDTO;
   [KafkaTopics.user.restart]: ActorIdDTO;
+  [KafkaTopics.user.changedProjection]: UserProjectionChangedDTO;
 
   [KafkaTopics.conversation.guestCreated]: ConversationCreatedDTO;
   [KafkaTopics.conversation.agentReplied]: SupportMessageReceivedDTO;
