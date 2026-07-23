@@ -3,6 +3,16 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.1.2](https://github.com/omnixys/kafka/compare/v3.1.1...v3.1.2) (2026-07-23)
+
+### Deps
+
+* **Deps:** update logger+observability deps version ([](https://github.com/omnixys/kafka/commit/81f395752310a76e10fe430e860b318c00b057b6))
+
+### Kafka
+
+* **Kafka:** remove logstream topic definitions ([](https://github.com/omnixys/kafka/commit/46493e343f51cd9a83d82e9a13ed7cc96611e0a5))
+
 ## [3.1.1](https://github.com/omnixys/kafka/compare/v3.1.0...v3.1.1) (2026-07-21)
 
 ### Tsconfig
