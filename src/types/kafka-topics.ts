@@ -80,13 +80,6 @@ export const KafkaTopics = {
     seatingInfoUpdated: "invitation.seating.info.updated",
   },
 
-  logstream: {
-    log: "logstream.log",
-    input: "logstream.input",
-    restart: `admin.restart.logstream`,
-    shutdown: `admin.shutdown.logstream`,
-  },
-
   notification: {
     restart: `admin.restart.notification`,
     shutdown: `admin.shutdown.notification`,
@@ -165,8 +158,7 @@ export type KafkaTopicPolicyName =
   | "default"
   | "retry"
   | "dlq"
-  | "compacted"
-  | "logstream";
+  | "compacted";
 
 export interface KafkaTopicPolicy {
   partitions: number;
@@ -282,27 +274,9 @@ export const KafkaTopicPolicies: Record<KafkaTopicPolicyName, KafkaTopicPolicy> 
       "retention.ms": "-1",
     },
   },
-  logstream: {
-    partitions: 3,
-    replicas: 1,
-    config: {
-      "cleanup.policy": "delete",
-      "compression.type": "producer",
-      "retention.ms": "604800000",
-    },
-  },
 } as const;
 
 export const KafkaTopicMetadataRegistry = {
-  logstream: {
-    log: {
-      owner: "observability",
-      description: "Central application log ingestion topic.",
-      policy: "logstream",
-      producers: ["omnixys-services"],
-      consumers: ["logstream"],
-    },
-  },
   gateway: {
     deliveryStatus: {
       owner: "gateway",
@@ -539,10 +513,6 @@ export function expandKafkaTopicCatalog(
 }
 
 export function inferKafkaTopicPolicy(topic: string): KafkaTopicPolicyName {
-  if (topic.startsWith("logstream.")) {
-    return "logstream";
-  }
-
   if (topic.includes(".dlq.") || topic.endsWith(".dlq")) {
     return "dlq";
   }
