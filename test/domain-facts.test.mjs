@@ -20,3 +20,19 @@ test("commands are never inferred as analytics facts", () => {
   );
   assert.equal(command?.classification, "COMMAND");
 });
+
+test("event lifecycle facts remain separate from legacy event topics", () => {
+  const catalog = getKafkaTopicCatalog();
+  assert.equal(KafkaTopics.event.created, "event.created");
+  assert.equal(KafkaTopics.event.createdFact, "event.created.v1");
+  for (const topic of [
+    KafkaTopics.event.createdFact,
+    KafkaTopics.event.updatedFact,
+    KafkaTopics.event.deletedFact,
+  ]) {
+    const fact = catalog.topics.find((entry) => entry.topic === topic);
+    assert.equal(fact?.classification, "FACT");
+    assert.deepEqual(fact?.producers, ["event"]);
+    assert.deepEqual(fact?.consumers, ["analytics"]);
+  }
+});

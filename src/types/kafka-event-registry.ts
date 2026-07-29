@@ -69,6 +69,9 @@ export interface KafkaEventRegistry {
   [KafkaTopics.authentication.logoutSucceededFact]: AnalyticsDomainFact;
   [KafkaTopics.authentication.emailVerifiedFact]: AnalyticsDomainFact;
   [KafkaTopics.authentication.phoneVerifiedFact]: AnalyticsDomainFact;
+  [KafkaTopics.event.createdFact]: AnalyticsDomainFact;
+  [KafkaTopics.event.updatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.event.deletedFact]: AnalyticsDomainFact;
   [KafkaTopics.event.activatedFact]: AnalyticsDomainFact;
   [KafkaTopics.event.deactivatedFact]: AnalyticsDomainFact;
   [KafkaTopics.invitation.createdFact]: AnalyticsDomainFact;
