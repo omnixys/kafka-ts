@@ -111,12 +111,14 @@ export class KafkaRetryService {
   }
 
   retryTopics(topics: readonly string[]): string[] {
-    return expandKafkaTopicNames(topics, {
+    const expanded = expandKafkaTopicNames(topics, {
       includeRetryTopics: true,
       includeDeadLetterTopics: false,
       retryTopicSuffix: this.retryTopicSuffix,
       deadLetterTopicSuffix: this.deadLetterTopicSuffix,
     });
+    const originals = new Set(topics);
+    return expanded.filter((topic) => !originals.has(topic));
   }
 
   originalTopic(

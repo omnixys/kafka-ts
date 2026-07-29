@@ -5,6 +5,10 @@
  */
 
 import type {
+  AnalyticsDataQualityIssue,
+  AnalyticsJobEvent,
+  AnalyticsProcessingEvent,
+  AnalyticsResourceEvent,
   ActorIdDTO,
   AddGuestIdToInvitationDTO,
   ConversationChannelMessageDTO,
@@ -37,6 +41,7 @@ import type {
   InternalMessageSentDTO,
   InternalReadReceiptDTO,
   InvitationSeatingInfoUpdatedDTO,
+  LogDTO,
   SendAuthLinkDTO,
   SupportMessageReceivedDTO,
   TokenDTO,
@@ -55,6 +60,36 @@ import { KafkaTopics } from "./kafka-topics.js";
  * Event payload definitions
  */
 export interface KafkaEventRegistry {
+  [KafkaTopics.analytics.eventsIngested]: AnalyticsProcessingEvent;
+  [KafkaTopics.analytics.eventsProcessed]: AnalyticsProcessingEvent;
+  [KafkaTopics.analytics.eventsQuarantined]: AnalyticsProcessingEvent;
+  [KafkaTopics.analytics.dataQualityDetected]: AnalyticsDataQualityIssue;
+  [KafkaTopics.analytics.identityUpdated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.sessionUpdated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.metricsUpdated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.realtimeUpdated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.ruleExecuted]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.ruleFailed]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.alertFired]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.alertResolved]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.pluginExecuted]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.pluginFailed]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.webhookRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.webhookDelivered]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.webhookFailed]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.reportRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.reportGenerated]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.reportFailed]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.exportRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.exportCompleted]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.exportFailed]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.replayRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.replayCompleted]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.replayFailed]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.deletionRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.deletionCompleted]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.insightGenerated]: AnalyticsResourceEvent;
+
   [KafkaTopics.address.createEventAddress]: CreateEventAddressDTO;
   [KafkaTopics.address.deleteEventAddress]: EventIdsDTO;
   [KafkaTopics.address.createUserAddresses]: CreateUserAddressDTO;
@@ -101,6 +136,11 @@ export interface KafkaEventRegistry {
   [KafkaTopics.invitation.deleteUserInvitations]: UserIdDTO;
   [KafkaTopics.invitation.deleteEventInvitations]: EventIdsDTO;
   [KafkaTopics.invitation.seatingInfoUpdated]: InvitationSeatingInfoUpdatedDTO;
+
+  [KafkaTopics.logstream.log]: LogDTO;
+  [KafkaTopics.logstream.input]: LogDTO;
+  [KafkaTopics.logstream.restart]: ActorIdDTO;
+  [KafkaTopics.logstream.shutdown]: ActorIdDTO;
 
   [KafkaTopics.notification.sendRequestReset]: SendAuthLinkDTO;
   [KafkaTopics.notification.sendMagicLink]: SendAuthLinkDTO;

@@ -80,6 +80,13 @@ export const KafkaTopics = {
     seatingInfoUpdated: "invitation.seating.info.updated",
   },
 
+  logstream: {
+    log: "logstream.log",
+    input: "logstream.input",
+    restart: "admin.restart.logstream",
+    shutdown: "admin.shutdown.logstream",
+  },
+
   notification: {
     restart: `admin.restart.notification`,
     shutdown: `admin.shutdown.notification`,
@@ -138,10 +145,48 @@ export const KafkaTopics = {
     escalated: "conversation.escalated",
   },
 
+  analytics: {
+    eventsIngested: "analytics.events.ingested",
+    eventsProcessed: "analytics.events.processed",
+    eventsQuarantined: "analytics.events.quarantined",
+    dataQualityDetected: "analytics.data-quality.detected",
+    identityUpdated: "analytics.identity.updated",
+    sessionUpdated: "analytics.session.updated",
+    metricsUpdated: "analytics.metrics.updated",
+    realtimeUpdated: "analytics.realtime.updated",
+    ruleExecuted: "analytics.rule.executed",
+    ruleFailed: "analytics.rule.failed",
+    alertFired: "analytics.alert.fired",
+    alertResolved: "analytics.alert.resolved",
+    pluginExecuted: "analytics.plugin.executed",
+    pluginFailed: "analytics.plugin.failed",
+    webhookRequested: "analytics.webhook.requested",
+    webhookDelivered: "analytics.webhook.delivered",
+    webhookFailed: "analytics.webhook.failed",
+    reportRequested: "analytics.report.requested",
+    reportGenerated: "analytics.report.generated",
+    reportFailed: "analytics.report.failed",
+    exportRequested: "analytics.export.requested",
+    exportCompleted: "analytics.export.completed",
+    exportFailed: "analytics.export.failed",
+    replayRequested: "analytics.replay.requested",
+    replayCompleted: "analytics.replay.completed",
+    replayFailed: "analytics.replay.failed",
+    deletionRequested: "analytics.deletion.requested",
+    deletionCompleted: "analytics.deletion.completed",
+    insightGenerated: "analytics.insight.generated",
+  },
+
   email: {
     inboundReceived: "email.inbound.received",
     outboundSend: "email.outbound.send",
     bounce: "email.bounce",
+  },
+
+  whatsapp: {
+    outgoing: "notification.outgoing.whatsapp",
+    retry: "notification.retry.whatsapp",
+    dlq: "notification.dlq.whatsapp",
   },
 } as const;
 
@@ -158,7 +203,8 @@ export type KafkaTopicPolicyName =
   | "default"
   | "retry"
   | "dlq"
-  | "compacted";
+  | "compacted"
+  | "logstream";
 
 export interface KafkaTopicPolicy {
   partitions: number;
@@ -274,9 +320,75 @@ export const KafkaTopicPolicies: Record<KafkaTopicPolicyName, KafkaTopicPolicy> 
       "retention.ms": "-1",
     },
   },
+  logstream: {
+    partitions: 3,
+    replicas: 1,
+    config: {
+      "cleanup.policy": "delete",
+      "compression.type": "producer",
+      "retention.ms": "604800000",
+    },
+  },
 } as const;
 
 export const KafkaTopicMetadataRegistry = {
+  analytics: {
+    eventsIngested: {
+      owner: "analytics",
+      description: "Validated product analytics events accepted for processing.",
+      policy: "default",
+      partitions: 12,
+      producers: ["analytics-gateway"],
+      consumers: ["analytics"],
+    },
+    eventsProcessed: {
+      owner: "analytics",
+      description: "Normalized analytics events persisted by the processing pipeline.",
+      policy: "default",
+      partitions: 12,
+      producers: ["analytics"],
+      consumers: ["analytics", "gateway"],
+    },
+    eventsQuarantined: {
+      owner: "analytics",
+      description: "Analytics events isolated by tracking-plan enforcement.",
+      policy: "default",
+      producers: ["analytics"],
+      consumers: ["analytics"],
+    },
+    dataQualityDetected: {
+      owner: "analytics",
+      description: "Data-quality issues detected during analytics processing.",
+      policy: "default",
+      producers: ["analytics"],
+      consumers: ["analytics", "gateway"],
+    },
+  },
+  logstream: {
+    log: {
+      owner: "observability",
+      description: "Central application log ingestion topic.",
+      policy: "logstream",
+      producers: ["omnixys-services"],
+      consumers: ["logstream"],
+    },
+  },
+  whatsapp: {
+    retry: {
+      owner: "notification",
+      description: "Retry queue for outbound WhatsApp notifications.",
+      policy: "retry",
+      producers: ["notification"],
+      consumers: ["notification"],
+    },
+    dlq: {
+      owner: "notification",
+      description: "Dead-letter queue for outbound WhatsApp notifications.",
+      policy: "dlq",
+      producers: ["notification"],
+      consumers: ["notification"],
+    },
+  },
   gateway: {
     deliveryStatus: {
       owner: "gateway",
@@ -513,6 +625,10 @@ export function expandKafkaTopicCatalog(
 }
 
 export function inferKafkaTopicPolicy(topic: string): KafkaTopicPolicyName {
+  if (topic.startsWith("logstream.")) {
+    return "logstream";
+  }
+
   if (topic.includes(".dlq.") || topic.endsWith(".dlq")) {
     return "dlq";
   }
