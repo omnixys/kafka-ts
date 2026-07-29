@@ -154,6 +154,7 @@ export const KafkaTopics = {
     sessionUpdated: "analytics.session.updated",
     metricsUpdated: "analytics.metrics.updated",
     realtimeUpdated: "analytics.realtime.updated",
+    featureFlagExposed: "analytics.feature-flag.exposed",
     ruleExecuted: "analytics.rule.executed",
     ruleFailed: "analytics.rule.failed",
     alertFired: "analytics.alert.fired",

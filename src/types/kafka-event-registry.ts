@@ -68,6 +68,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.analytics.sessionUpdated]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.metricsUpdated]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.realtimeUpdated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.featureFlagExposed]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.ruleExecuted]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.ruleFailed]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.alertFired]: AnalyticsResourceEvent;
