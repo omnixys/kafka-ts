@@ -174,7 +174,9 @@ export const KafkaTopics = {
     replayFailed: "analytics.replay.failed",
     deletionRequested: "analytics.deletion.requested",
     deletionCompleted: "analytics.deletion.completed",
+    insightRequested: "analytics.insight.requested",
     insightGenerated: "analytics.insight.generated",
+    insightFailed: "analytics.insight.failed",
   },
 
   email: {

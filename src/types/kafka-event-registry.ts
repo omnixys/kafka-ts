@@ -88,7 +88,9 @@ export interface KafkaEventRegistry {
   [KafkaTopics.analytics.replayFailed]: AnalyticsJobEvent;
   [KafkaTopics.analytics.deletionRequested]: AnalyticsJobEvent;
   [KafkaTopics.analytics.deletionCompleted]: AnalyticsJobEvent;
-  [KafkaTopics.analytics.insightGenerated]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.insightRequested]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.insightGenerated]: AnalyticsJobEvent;
+  [KafkaTopics.analytics.insightFailed]: AnalyticsJobEvent;
 
   [KafkaTopics.address.createEventAddress]: CreateEventAddressDTO;
   [KafkaTopics.address.deleteEventAddress]: EventIdsDTO;
