@@ -159,6 +159,7 @@ export const KafkaTopics = {
     ruleFailed: "analytics.rule.failed",
     alertFired: "analytics.alert.fired",
     alertResolved: "analytics.alert.resolved",
+    notificationRequested: "analytics.notification.requested",
     pluginExecuted: "analytics.plugin.executed",
     pluginFailed: "analytics.plugin.failed",
     webhookRequested: "analytics.webhook.requested",

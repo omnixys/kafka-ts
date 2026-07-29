@@ -73,6 +73,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.analytics.ruleFailed]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.alertFired]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.alertResolved]: AnalyticsResourceEvent;
+  [KafkaTopics.analytics.notificationRequested]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.pluginExecuted]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.pluginFailed]: AnalyticsResourceEvent;
   [KafkaTopics.analytics.webhookRequested]: AnalyticsJobEvent;
