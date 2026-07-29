@@ -37,7 +37,6 @@ import type {
   InternalMessageSentDTO,
   InternalReadReceiptDTO,
   InvitationSeatingInfoUpdatedDTO,
-  LogDTO,
   SendAuthLinkDTO,
   SupportMessageReceivedDTO,
   TokenDTO,
@@ -102,10 +101,6 @@ export interface KafkaEventRegistry {
   [KafkaTopics.invitation.deleteUserInvitations]: UserIdDTO;
   [KafkaTopics.invitation.deleteEventInvitations]: EventIdsDTO;
   [KafkaTopics.invitation.seatingInfoUpdated]: InvitationSeatingInfoUpdatedDTO;
-
-  [KafkaTopics.logstream.log]: LogDTO;
-  [KafkaTopics.logstream.restart]: ActorIdDTO;
-  [KafkaTopics.logstream.shutdown]: ActorIdDTO;
 
   [KafkaTopics.notification.sendRequestReset]: SendAuthLinkDTO;
   [KafkaTopics.notification.sendMagicLink]: SendAuthLinkDTO;
