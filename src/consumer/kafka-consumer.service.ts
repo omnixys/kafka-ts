@@ -313,6 +313,10 @@ export class KafkaConsumerService
 
     const current = ContextAccessor.get();
     const eventContext: IKafkaEventContext = {
+      eventId: envelope.eventId,
+      eventVersion: envelope.eventVersion,
+      eventType: envelope.eventType,
+      service: envelope.service,
       topic,
       partition,
       offset: message.offset,

@@ -15,6 +15,12 @@
  * This contains transport-level information coming from Kafka.
  */
 export interface IKafkaEventContext {
+  /** Stable envelope identity used for downstream idempotency. */
+  eventId: string;
+  eventVersion: string;
+  eventType?: string;
+  service: string;
+
   /**
    * Kafka topic name
    */

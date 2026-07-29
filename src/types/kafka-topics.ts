@@ -26,6 +26,9 @@ export const KafkaTopics = {
     deleteEventAddress: "event.delete.address",
     createUserAddresses: "authentication.create.addresses",
     deleteUserAddresses: "authentication.delete.addresses",
+    createdFact: "address.created.v1",
+    updatedFact: "address.updated.v1",
+    deletedFact: "address.deleted.v1",
   },
 
   admin: {
@@ -39,6 +42,11 @@ export const KafkaTopics = {
     deleteGuest: "invitation.deleteGuest.authentication",
     deleteGuestList: "invitation.deleteGuestList.authentication",
     createGuest: "invitation.createGuest.authentication",
+    loginSucceededFact: "authentication.login.succeeded.v1",
+    loginFailedFact: "authentication.login.failed.v1",
+    logoutSucceededFact: "authentication.logout.succeeded.v1",
+    emailVerifiedFact: "authentication.email.verified.v1",
+    phoneVerifiedFact: "authentication.phone.verified.v1",
   },
 
   event: {
@@ -60,6 +68,8 @@ export const KafkaTopics = {
     userAccessChanged: "event.user.access.changed",
     ownerChanged: "event.owner.changed",
     deleted: "event.deleted",
+    activatedFact: "event.activated.v1",
+    deactivatedFact: "event.deactivated.v1",
   },
 
   gateway: {
@@ -78,6 +88,12 @@ export const KafkaTopics = {
     addGuestId: `ticket.addGuestId.invitation`,
     deleteEventInvitations: "event.eventDelete.invitation",
     seatingInfoUpdated: "invitation.seating.info.updated",
+    createdFact: "invitation.created.v1",
+    acceptedFact: "invitation.accepted.v1",
+    declinedFact: "invitation.declined.v1",
+    expiredFact: "invitation.expired.v1",
+    rsvpSubmittedFact: "invitation.rsvp.submitted.v1",
+    rsvpUpdatedFact: "invitation.rsvp.updated.v1",
   },
 
   logstream: {
@@ -98,6 +114,8 @@ export const KafkaTopics = {
     notifyUser: `authentication.notifyRegistration.notification`,
 
     eventCancelled: "event.cancel.notification",
+    deliveredFact: "notification.delivered.v1",
+    failedFact: "notification.failed.v1",
   },
 
   seat: {
@@ -109,6 +127,9 @@ export const KafkaTopics = {
 
     addGuestId: `user.addGuestId.seat`,
     removeGuestId: `user.deleteGuestId.seat`,
+    assignedFact: "seat.assigned.v1",
+    changedFact: "seat.changed.v1",
+    unassignedFact: "seat.unassigned.v1",
   },
 
   ticket: {
@@ -118,6 +139,12 @@ export const KafkaTopics = {
     deleteEventTickets: "event.eventDelete.ticket",
     deleteUserTickets: "authentication.userDelete.ticket",
     create: `authentication.create.ticket`,
+    generatedFact: "ticket.generated.v1",
+    revokedFact: "ticket.revoked.v1",
+    scanSucceededFact: "ticket.scan.succeeded.v1",
+    scanRejectedFact: "ticket.scan.rejected.v1",
+    guestCheckedInFact: "ticket.guest.checked-in.v1",
+    guestCheckedOutFact: "ticket.guest.checked-out.v1",
   },
 
   user: {
@@ -128,6 +155,7 @@ export const KafkaTopics = {
     createGuest: "authentication.createGuest.user",
     createProviderUser: "authentication.provider.user",
     changedProjection: "user.changed.projection",
+    profileUpdatedFact: "user.profile.updated.v1",
   },
 
   conversation: {
@@ -143,6 +171,9 @@ export const KafkaTopics = {
     deliveryUpdate: "conversation.delivery.update",
     conversationMapped: "conversation.mapped",
     escalated: "conversation.escalated",
+    createdFact: "conversation.created.v1",
+    messageSentFact: "conversation.message.sent.v1",
+    closedFact: "conversation.closed.v1",
   },
 
   analytics: {
@@ -192,6 +223,11 @@ export const KafkaTopics = {
     retry: "notification.retry.whatsapp",
     dlq: "notification.dlq.whatsapp",
   },
+
+  communication: {
+    deliverySucceededFact: "communication.delivery.succeeded.v1",
+    deliveryFailedFact: "communication.delivery.failed.v1",
+  },
 } as const;
 
 /**
@@ -227,6 +263,7 @@ export interface KafkaTopicMetadata {
   partitions?: number;
   replicas?: number;
   config?: KafkaTopicConfig;
+  classification?: "FACT" | "COMMAND" | "TECHNICAL";
 }
 
 export interface KafkaTopicCatalogEntry {
@@ -242,6 +279,7 @@ export interface KafkaTopicCatalogEntry {
   partitions: number;
   replicas: number;
   config: KafkaTopicConfig;
+  classification: "FACT" | "COMMAND" | "TECHNICAL";
 }
 
 export interface KafkaTopicCatalog {
@@ -336,6 +374,47 @@ export const KafkaTopicPolicies: Record<KafkaTopicPolicyName, KafkaTopicPolicy> 
 } as const;
 
 export const KafkaTopicMetadataRegistry = {
+  address: factMetadata("address", [
+    "createdFact",
+    "updatedFact",
+    "deletedFact",
+  ]),
+  authentication: factMetadata("authentication", [
+    "loginSucceededFact",
+    "loginFailedFact",
+    "logoutSucceededFact",
+    "emailVerifiedFact",
+    "phoneVerifiedFact",
+  ]),
+  event: factMetadata("event", ["activatedFact", "deactivatedFact"]),
+  invitation: factMetadata("invitation", [
+    "createdFact",
+    "acceptedFact",
+    "declinedFact",
+    "expiredFact",
+    "rsvpSubmittedFact",
+    "rsvpUpdatedFact",
+  ]),
+  notification: factMetadata("notification", ["deliveredFact", "failedFact"]),
+  seat: factMetadata("seat", ["assignedFact", "changedFact", "unassignedFact"]),
+  ticket: factMetadata("ticket", [
+    "generatedFact",
+    "revokedFact",
+    "scanSucceededFact",
+    "scanRejectedFact",
+    "guestCheckedInFact",
+    "guestCheckedOutFact",
+  ]),
+  user: factMetadata("user", ["profileUpdatedFact"]),
+  conversation: factMetadata("chat", [
+    "createdFact",
+    "messageSentFact",
+    "closedFact",
+  ]),
+  communication: factMetadata("communication-gateway", [
+    "deliverySucceededFact",
+    "deliveryFailedFact",
+  ]),
   analytics: {
     eventsIngested: {
       owner: "analytics",
@@ -450,6 +529,7 @@ export function getKafkaTopicCatalog(): KafkaTopicCatalog {
           ...policyDefaults.config,
           ...(metadata.config ?? {}),
         },
+        classification: metadata.classification ?? inferClassification(topic),
       } satisfies KafkaTopicCatalogEntry;
     }),
   );
@@ -461,6 +541,34 @@ export function getKafkaTopicCatalog(): KafkaTopicCatalog {
     policies: KafkaTopicPolicies,
     topics,
   };
+}
+
+function factMetadata(
+  producer: string,
+  keys: readonly string[],
+): Record<string, KafkaTopicMetadata> {
+  return Object.fromEntries(
+    keys.map((key) => [
+      key,
+      {
+        owner: producer,
+        description: `Immutable ${producer} business outcome for analytics.`,
+        version: 1,
+        producers: [producer],
+        consumers: ["analytics"],
+        classification: "FACT",
+      },
+    ]),
+  );
+}
+
+function inferClassification(
+  topic: string,
+): "FACT" | "COMMAND" | "TECHNICAL" {
+  if (topic.startsWith("analytics.") || topic.startsWith("logstream.")) {
+    return "TECHNICAL";
+  }
+  return "COMMAND";
 }
 
 export function validateKafkaTopicCatalog(

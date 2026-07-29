@@ -6,6 +6,7 @@
 
 import type {
   AnalyticsDataQualityIssue,
+  AnalyticsDomainFact,
   AnalyticsJobEvent,
   AnalyticsProcessingEvent,
   AnalyticsResourceEvent,
@@ -60,6 +61,40 @@ import { KafkaTopics } from "./kafka-topics.js";
  * Event payload definitions
  */
 export interface KafkaEventRegistry {
+  [KafkaTopics.address.createdFact]: AnalyticsDomainFact;
+  [KafkaTopics.address.updatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.address.deletedFact]: AnalyticsDomainFact;
+  [KafkaTopics.authentication.loginSucceededFact]: AnalyticsDomainFact;
+  [KafkaTopics.authentication.loginFailedFact]: AnalyticsDomainFact;
+  [KafkaTopics.authentication.logoutSucceededFact]: AnalyticsDomainFact;
+  [KafkaTopics.authentication.emailVerifiedFact]: AnalyticsDomainFact;
+  [KafkaTopics.authentication.phoneVerifiedFact]: AnalyticsDomainFact;
+  [KafkaTopics.event.activatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.event.deactivatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.createdFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.acceptedFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.declinedFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.expiredFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.rsvpSubmittedFact]: AnalyticsDomainFact;
+  [KafkaTopics.invitation.rsvpUpdatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.notification.deliveredFact]: AnalyticsDomainFact;
+  [KafkaTopics.notification.failedFact]: AnalyticsDomainFact;
+  [KafkaTopics.seat.assignedFact]: AnalyticsDomainFact;
+  [KafkaTopics.seat.changedFact]: AnalyticsDomainFact;
+  [KafkaTopics.seat.unassignedFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.generatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.revokedFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.scanSucceededFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.scanRejectedFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.guestCheckedInFact]: AnalyticsDomainFact;
+  [KafkaTopics.ticket.guestCheckedOutFact]: AnalyticsDomainFact;
+  [KafkaTopics.user.profileUpdatedFact]: AnalyticsDomainFact;
+  [KafkaTopics.conversation.createdFact]: AnalyticsDomainFact;
+  [KafkaTopics.conversation.messageSentFact]: AnalyticsDomainFact;
+  [KafkaTopics.conversation.closedFact]: AnalyticsDomainFact;
+  [KafkaTopics.communication.deliverySucceededFact]: AnalyticsDomainFact;
+  [KafkaTopics.communication.deliveryFailedFact]: AnalyticsDomainFact;
+
   [KafkaTopics.analytics.eventsIngested]: AnalyticsProcessingEvent;
   [KafkaTopics.analytics.eventsProcessed]: AnalyticsProcessingEvent;
   [KafkaTopics.analytics.eventsQuarantined]: AnalyticsProcessingEvent;
