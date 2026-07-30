@@ -1,4 +1,4 @@
-# @omnixys/kafka
+# @omnixys/kafka-ts
 
 Kafka infrastructure module for Omnixys microservices.
 
@@ -34,7 +34,7 @@ The package is designed as a reusable infrastructure layer for the Omnixys platf
 # Installation
 
 ```bash
-pnpm add @omnixys/kafka
+pnpm add @omnixys/kafka-ts
 ````
 
 ---
@@ -44,7 +44,7 @@ pnpm add @omnixys/kafka
 ## Register Kafka Module
 
 ```ts
-import { KafkaModule } from "@omnixys/kafka";
+import { KafkaModule } from "@omnixys/kafka-ts";
 
 @Module({
   imports: [
@@ -65,7 +65,7 @@ export class AppModule {}
 Use the `KafkaProducerService` to publish events.
 
 ```ts
-import { KafkaProducerService, KafkaTopics } from "@omnixys/kafka";
+import { KafkaProducerService, KafkaTopics } from "@omnixys/kafka-ts";
 
 @Injectable()
 export class InvitationPublisher {
@@ -95,7 +95,7 @@ import {
   KafkaEvent,
   KafkaTopics,
   KafkaEventContext,
-} from "@omnixys/kafka";
+} from "@omnixys/kafka-ts";
 
 @KafkaHandler("InvitationHandler")
 export class InvitationHandler {

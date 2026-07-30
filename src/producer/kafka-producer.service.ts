@@ -11,13 +11,13 @@ import type {
 } from "../types/kafka-event.types.js";
 import { Inject, Injectable, OnModuleDestroy, OnModuleInit, Optional } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
-import { ContextAccessor } from "@omnixys/context";
-import { OmnixysLogger } from "@omnixys/logger";
+import { ContextAccessor } from "@omnixys/context-ts";
+import { OmnixysLogger } from "@omnixys/logger-ts";
 import {
   KafkaTrace,
   TraceContextExtractor,
   W3CPropagator,
-} from "@omnixys/observability";
+} from "@omnixys/observability-ts";
 import type { IHeaders, Message, Producer, TopicMessages } from "kafkajs";
 import { randomUUID } from "node:crypto";
 

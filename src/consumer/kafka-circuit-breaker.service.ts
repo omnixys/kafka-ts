@@ -1,5 +1,5 @@
 import { Injectable, Optional } from "@nestjs/common";
-import { OmnixysLogger } from "@omnixys/logger";
+import { OmnixysLogger } from "@omnixys/logger-ts";
 import { KafkaFrameworkError } from "../core/kafka.error.js";
 
 export type KafkaCircuitState = "CLOSED" | "HALF_OPEN" | "OPEN";

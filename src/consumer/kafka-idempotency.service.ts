@@ -1,8 +1,8 @@
 import { KAFKA_OPTIONS } from "../core/kafka.constants.js";
 import type { KafkaModuleOptions } from "../core/kafka.options.js";
 import { Inject, Injectable, Optional } from "@nestjs/common";
-import { ValkeyService } from "@omnixys/cache";
-import { OmnixysLogger } from "@omnixys/logger";
+import { ValkeyService } from "@omnixys/cache-ts";
+import { OmnixysLogger } from "@omnixys/logger-ts";
 
 @Injectable()
 export class KafkaIdempotencyService {

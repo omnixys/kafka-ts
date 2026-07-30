@@ -4,7 +4,7 @@ import "reflect-metadata";
 
 import { Global, Module } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { LoggerModule, OmnixysLogger } from "@omnixys/logger";
+import { LoggerModule, OmnixysLogger } from "@omnixys/logger-ts";
 import {
   KAFKA_EVENT_PUBLISHER,
   KAFKA_OPTIONS,

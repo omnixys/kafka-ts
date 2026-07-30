@@ -12,7 +12,7 @@ import {
   retryKafkaTopicName,
 } from "../types/kafka-topics.js";
 import { Inject, Injectable, Optional } from "@nestjs/common";
-import { OmnixysLogger } from "@omnixys/logger";
+import { OmnixysLogger } from "@omnixys/logger-ts";
 
 @Injectable()
 export class KafkaRetryService {

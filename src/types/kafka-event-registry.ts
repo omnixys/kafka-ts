@@ -54,7 +54,7 @@ import type {
   UserIdListDTO,
   CreatePlusOneAccountDTO,
   UserProjectionChangedDTO,
-} from "@omnixys/contracts";
+} from "@omnixys/contracts-ts";
 import { KafkaTopics } from "./kafka-topics.js";
 
 /**

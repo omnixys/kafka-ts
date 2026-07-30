@@ -10,7 +10,7 @@ import type {
 import type { IKafkaEventContext } from "../types/kafka-event.interface.js";
 import { Injectable, OnModuleInit, Optional } from "@nestjs/common";
 import { DiscoveryService, MetadataScanner, Reflector } from "@nestjs/core";
-import { OmnixysLogger } from "@omnixys/logger";
+import { OmnixysLogger } from "@omnixys/logger-ts";
 
 interface HandlerEntry {
   instance: Record<string, any>;

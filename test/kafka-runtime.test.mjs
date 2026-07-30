@@ -1,4 +1,4 @@
-import { ContextAccessor } from "@omnixys/context";
+import { ContextAccessor } from "@omnixys/context-ts";
 import {
   KAFKA_HANDLER,
   KAFKA_HEADERS,

@@ -1,4 +1,4 @@
-import { ContextAccessor } from "@omnixys/context";
+import { ContextAccessor } from "@omnixys/context-ts";
 
 export class KafkaFrameworkError extends Error {
   readonly requestId: string;

@@ -26,9 +26,9 @@ import {
   OnModuleDestroy,
   Optional,
 } from "@nestjs/common";
-import { ContextAccessor } from "@omnixys/context";
-import { OmnixysLogger } from "@omnixys/logger";
-import { KafkaTrace } from "@omnixys/observability";
+import { ContextAccessor } from "@omnixys/context-ts";
+import { OmnixysLogger } from "@omnixys/logger-ts";
+import { KafkaTrace } from "@omnixys/observability-ts";
 import type { Consumer, EachBatchPayload, KafkaMessage } from "kafkajs";
 import { randomUUID } from "node:crypto";
 
