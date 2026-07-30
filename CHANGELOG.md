@@ -3,6 +3,31 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.2.0](https://github.com/omnixys/kafka-ts/compare/v3.1.2...v3.2.0) (2026-07-30)
+
+### Analytics
+
+* **Analytics:** add scheduled insight topics ([](https://github.com/omnixys/kafka-ts/commit/58cbf7eff2d507048f7acc2afa7b25562b6ae3cd))
+* **Analytics:** register domain fact topics ([](https://github.com/omnixys/kafka-ts/commit/ae062db1e764594831b829176f660f33abde38b2))
+* **Analytics:** register event lifecycle fact topics ([](https://github.com/omnixys/kafka-ts/commit/c34dbd89c8da0d6e35368f1f222b6153a4f443f4))
+* **Analytics:** register platform topic contracts ([](https://github.com/omnixys/kafka-ts/commit/7fb3a4995138544af4797d062cd244395d2a19f6))
+
+### Deps
+
+* **Deps:** fix imports ([](https://github.com/omnixys/kafka-ts/commit/510836d34fb774b5eacd450072fc3f8520948f19))
+
+### Feature-flags
+
+* **Feature-flags:** publish exposure events ([](https://github.com/omnixys/kafka-ts/commit/8f9d2de752deaa6bd76e01857873b46e68b214b6))
+
+### Rules
+
+* **Rules:** add notification hook topic ([](https://github.com/omnixys/kafka-ts/commit/0e3729d979e19447105eeb1a85e44d12ba8e57a2))
+
+### Topics
+
+* **Topics:** remove stale logstream types ([](https://github.com/omnixys/kafka-ts/commit/524cf1842ed2fb0ddb310e2c857d1673b4737949))
+
 ## [3.1.2](https://github.com/omnixys/kafka/compare/v3.1.1...v3.1.2) (2026-07-23)
 
 ### Deps
