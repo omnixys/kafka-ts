@@ -3,6 +3,16 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.2.1](https://github.com/omnixys/kafka-ts/compare/v3.2.0...v3.2.1) (2026-08-01)
+
+### Deps
+
+* **Deps:** update omnixs package deps ([](https://github.com/omnixys/kafka-ts/commit/4b8009a3993e8e455fd3dd7c33918a0828171978))
+
+### Semver
+
+* **Semver:** add semver ([](https://github.com/omnixys/kafka-ts/commit/d185d2bb1495f998bdd79a21513745064938c4a6))
+
 ## [3.2.0](https://github.com/omnixys/kafka-ts/compare/v3.1.2...v3.2.0) (2026-07-30)
 
 ### Analytics
