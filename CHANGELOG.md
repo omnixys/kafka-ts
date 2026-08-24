@@ -3,6 +3,20 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.3.0](https://github.com/omnixys/kafka-ts/compare/v3.2.1...v3.3.0) (2026-08-24)
+
+### Agent
+
+* **Agent:** add repository development instructions ([](https://github.com/omnixys/kafka-ts/commit/1de790df3f5eb23c3d5353dccf74a12d7e097f98))
+
+### Context
+
+* **Context:** update dependency ([](https://github.com/omnixys/kafka-ts/commit/aafef9c5cd8ac1e94aaec1b1a30dca8e936760bc))
+
+### Kafka
+
+* **Kafka:** log errors via OmnixysLogger on all exception paths ([](https://github.com/omnixys/kafka-ts/commit/90832de64d4218a31fb1f29c61dfbebb3bb12fb9))
+
 ## [3.2.1](https://github.com/omnixys/kafka-ts/compare/v3.2.0...v3.2.1) (2026-08-01)
 
 ### Deps
