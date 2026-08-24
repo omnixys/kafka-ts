@@ -9,7 +9,13 @@ import type {
   KafkaPayloadType,
   KafkaTopicType,
 } from "../types/kafka-event.types.js";
-import { Inject, Injectable, OnModuleDestroy, OnModuleInit, Optional } from "@nestjs/common";
+import {
+  Inject,
+  Injectable,
+  OnModuleDestroy,
+  OnModuleInit,
+  Optional,
+} from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { ContextAccessor } from "@omnixys/context-ts";
 import { OmnixysLogger } from "@omnixys/logger-ts";
@@ -303,12 +309,10 @@ export class KafkaProducerService implements OnModuleDestroy, OnModuleInit {
             topic,
           });
       } catch (error) {
-        this.logger
-          ?.child(KafkaProducerService.name)
-          .error("Kafka send failed", {
-            topic,
-            error,
-          });
+        this.log?.error("Kafka send failed", {
+          topic,
+          error,
+        });
         throw error;
       }
     });
@@ -327,6 +331,9 @@ export class KafkaProducerService implements OnModuleDestroy, OnModuleInit {
 
   private async withSend<T>(operation: () => Promise<T>): Promise<T> {
     if (this.closing || !this.connected) {
+      this.log?.error("Kafka producer is not ready, send rejected", {
+        status: this.status(),
+      });
       throw new KafkaLifecycleError("Kafka producer is not ready", {
         status: this.status(),
       });
@@ -340,6 +347,9 @@ export class KafkaProducerService implements OnModuleDestroy, OnModuleInit {
     try {
       await prev;
       if (this.closing || !this.connected) {
+        this.log?.error("Kafka producer became not ready during send", {
+          status: this.status(),
+        });
         throw new KafkaLifecycleError("Kafka producer is not ready", {
           status: this.status(),
         });
@@ -377,6 +387,17 @@ export class KafkaProducerService implements OnModuleDestroy, OnModuleInit {
   private get logger(): OmnixysLogger | undefined {
     try {
       return this.moduleRef?.get(OmnixysLogger, { strict: false });
+    } catch {
+      return undefined;
+    }
+  }
+
+  private scopedLog?: ReturnType<OmnixysLogger["log"]>;
+
+  private get log(): ReturnType<OmnixysLogger["log"]> | undefined {
+    try {
+      this.scopedLog ??= this.logger?.log(KafkaProducerService.name);
+      return this.scopedLog;
     } catch {
       return undefined;
     }

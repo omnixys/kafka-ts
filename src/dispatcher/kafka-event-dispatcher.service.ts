@@ -24,13 +24,16 @@ export class KafkaEventDispatcherService implements OnModuleInit {
   readonly ready = new Promise<void>((resolve) => {
     this.readyResolver = resolve;
   });
+  private readonly log;
 
   constructor(
     private readonly discovery: DiscoveryService,
     private readonly scanner: MetadataScanner,
     private readonly reflector: Reflector,
     @Optional() private readonly logger?: OmnixysLogger,
-  ) {}
+  ) {
+    this.log = this.logger?.log(this.constructor.name);
+  }
 
   onModuleInit(): void {
     this.scanHandlers();
@@ -61,12 +64,21 @@ export class KafkaEventDispatcherService implements OnModuleInit {
     context: IKafkaEventContext,
   ): Promise<void> {
     const entry = this.handlers.get(topic);
-    if (!entry) throw new KafkaHandlerNotFoundError(String(topic));
+    if (!entry) {
+      this.log?.error("Kafka dispatch failed, no handler registered", {
+        topic,
+      });
+      throw new KafkaHandlerNotFoundError(String(topic));
+    }
 
     const method = entry.instance[entry.methodName] as (
       ...args: any[]
     ) => Promise<void> | void;
     if (typeof method !== "function") {
+      this.log?.error("Kafka handler is not a function", {
+        topic,
+        handler: `${entry.instance.constructor.name}.${entry.methodName}`,
+      });
       throw new Error(`Invalid Kafka handler for topic "${topic}"`);
     }
     if (method.length >= 3) {
@@ -96,6 +108,11 @@ export class KafkaEventDispatcherService implements OnModuleInit {
         for (const topic of metadata.topics) {
           const existing = this.handlers.get(topic);
           if (existing) {
+            this.log?.error("Duplicate Kafka handler registration", {
+              topic,
+              existingHandler: `${existing.instance.constructor.name}.${existing.methodName}`,
+              newHandler: `${instance.constructor.name}.${methodName}`,
+            });
             throw new Error(
               `Duplicate Kafka handler for topic "${topic}": ` +
                 `${existing.instance.constructor.name}.${existing.methodName} and ` +

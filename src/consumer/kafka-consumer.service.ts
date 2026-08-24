@@ -51,6 +51,7 @@ export class KafkaConsumerService
   private inFlight = 0;
   private subscribedTopics: string[] = [];
   private closePromise?: Promise<void>;
+  private readonly log;
 
   constructor(
     @Inject(KAFKA_CONSUMER) private readonly consumer: Consumer,
@@ -62,7 +63,9 @@ export class KafkaConsumerService
     @Inject(KAFKA_OPTIONS)
     private readonly options?: KafkaModuleOptions,
     @Optional() private readonly logger?: OmnixysLogger,
-  ) {}
+  ) {
+    this.log = this.logger?.log(this.constructor.name);
+  }
 
   onApplicationBootstrap(): Promise<void> {
     return this.start();
@@ -103,6 +106,7 @@ export class KafkaConsumerService
         });
     } catch (error) {
       this.running = false;
+      this.log?.error("Kafka consumer failed to start", { error });
       throw error;
     } finally {
       this.starting = false;
@@ -168,6 +172,10 @@ export class KafkaConsumerService
     const deadline = Date.now() + timeoutMs;
     while (this.inFlight > 0) {
       if (Date.now() >= deadline) {
+        this.log?.error("Kafka consumer drain timed out", {
+          timeoutMs,
+          inFlight: this.inFlight,
+        });
         throw new KafkaLifecycleError(
           `Kafka consumer drain timed out after ${timeoutMs}ms`,
           { timeoutMs, inFlight: this.inFlight },
@@ -271,14 +279,12 @@ export class KafkaConsumerService
       }
       envelope = parsed;
     } catch (error) {
-      this.logger
-        ?.child(KafkaConsumerService.name)
-        .error("Invalid Kafka message routed to retry policy", {
-          topic,
-          partition,
-          offset: message.offset,
-          error,
-        });
+      this.log?.error("Invalid Kafka message routed to retry policy", {
+        topic,
+        partition,
+        offset: message.offset,
+        error,
+      });
       await this.retryService.handleRetry(topic, rawValue, headers, error);
       resolveOffset(message.offset);
       return;
@@ -286,17 +292,18 @@ export class KafkaConsumerService
 
     const expectedTopic = this.retryService.originalTopic(topic, headers);
     if (envelope.eventName !== expectedTopic) {
-      this.logger
-        ?.child(KafkaConsumerService.name)
-        .warn("Kafka envelope topic mismatch", {
-          envelopeTopic: envelope.eventName,
-          kafkaTopic: topic,
-          expectedTopic,
-        });
       const error = new KafkaEnvelopeError({
         reason: "topic_mismatch",
         envelopeTopic: envelope.eventName,
         expectedTopic,
+      });
+      this.log?.error("Kafka envelope topic mismatch", {
+        envelopeTopic: envelope.eventName,
+        kafkaTopic: topic,
+        expectedTopic,
+        partition,
+        offset: message.offset,
+        error,
       });
       await this.retryService.handleRetry(topic, rawValue, headers, error);
       resolveOffset(message.offset);
@@ -344,14 +351,12 @@ export class KafkaConsumerService
       resolveOffset(message.offset);
       await heartbeat();
     } catch (error) {
-      this.logger
-        ?.child(KafkaConsumerService.name)
-        .error("Kafka message processing failed", {
-          topic,
-          partition,
-          offset: message.offset,
-          error,
-        });
+      this.log?.error("Kafka message processing failed", {
+        topic,
+        partition,
+        offset: message.offset,
+        error,
+      });
       await this.retryService.handleRetry(topic, rawValue, headers, error);
       resolveOffset(message.offset);
     }

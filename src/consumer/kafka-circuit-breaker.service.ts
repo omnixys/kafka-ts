@@ -22,8 +22,11 @@ export class KafkaCircuitOpenError extends KafkaFrameworkError {
 @Injectable()
 export class KafkaCircuitBreakerService {
   private readonly circuits = new Map<string, Circuit>();
+  private readonly log;
 
-  constructor(@Optional() private readonly logger?: OmnixysLogger) {}
+  constructor(@Optional() private readonly logger?: OmnixysLogger) {
+    this.log = this.logger?.log(this.constructor.name);
+  }
 
   async execute<T>(
     operation: () => Promise<T>,
@@ -34,6 +37,10 @@ export class KafkaCircuitBreakerService {
       if (Date.now() - circuit.lastFailureTime > 10_000) {
         circuit.state = "HALF_OPEN";
       } else {
+        this.log?.error("Kafka circuit is open, operation rejected", {
+          circuit: circuitName,
+          failures: circuit.failures,
+        });
         throw new KafkaCircuitOpenError(circuitName);
       }
     }
@@ -48,13 +55,11 @@ export class KafkaCircuitBreakerService {
       circuit.failures += 1;
       circuit.lastFailureTime = Date.now();
       if (circuit.failures >= 5) circuit.state = "OPEN";
-      this.logger
-        ?.child(KafkaCircuitBreakerService.name)
-        .error("Kafka handler circuit recorded a failure", {
-          circuit: circuitName,
-          failures: circuit.failures,
-          error,
-        });
+      this.log?.error("Kafka handler circuit recorded a failure", {
+        circuit: circuitName,
+        failures: circuit.failures,
+        error,
+      });
       throw error;
     }
   }
