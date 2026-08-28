@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [3.3.1](https://github.com/omnixys/kafka-ts/compare/v3.3.0...v3.3.1) (2026-08-28)
+
+### Deps
+
+* **Deps:** update contracts-ts ([](https://github.com/omnixys/kafka-ts/commit/224b8b7316f85e09b6655c9efc168f39c33f02c2))
+
 ## [3.3.0](https://github.com/omnixys/kafka-ts/compare/v3.2.1...v3.3.0) (2026-08-24)
 
 ### Agent
