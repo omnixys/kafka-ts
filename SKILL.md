@@ -9,7 +9,7 @@
 
 - Kind: Shared Package
 - Package: `@omnixys/kafka-ts` (version: 3.2.1)
-- Runtime: Node >=20 (pnpm >=10.33.0)
+- Runtime: Node >=26.8.1 (pnpm >=11.24.0)
 - Description: Omnixys Kafka infrastructure for TypeScript (producer/consumer, retry, DLQ).
 - Architecture: src/ Kafka infrastructure
 - Database: n/a; Migrations: n/a
