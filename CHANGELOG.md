@@ -3,6 +3,26 @@
 All notable changes in this project will be documented in this file.
 
 
+## [4.0.0](https://github.com/omnixys/kafka-ts/compare/v3.3.1...v4.0.0) (2026-09-02)
+
+### Ci
+
+* **Ci:** add missing labeler and dependabot config to match contracts ([](https://github.com/omnixys/kafka-ts/commit/6bad831097a8b2fb83bf6adb385e446845e0bd48))
+* **Ci:** add PR build check workflow for main ([](https://github.com/omnixys/kafka-ts/commit/bb37ee736abe46658704a1566ac33a03fe16cfe6))
+* **Ci:** add npm registry auth before install in release workflow ([](https://github.com/omnixys/kafka-ts/commit/1b7b239fac585d951e2e42b1244cc2285a7dcfc6))
+
+### Deps
+
+* **Deps:** update omnixys deps ([](https://github.com/omnixys/kafka-ts/commit/f518feec86a2d202d209316150ffbf06a18c0c9a))
+
+### Other
+
+* **Other:** Merge pull request #1 from omnixys/migration/uuid-v7 ([](https://github.com/omnixys/kafka-ts/commit/5edf7c4019ea9946026bae26d04dc38966b530e6)), closes [#1](https://github.com/omnixys/kafka-ts/issues/1)
+
+### Runtime
+
+* **Runtime:** require node 26.8.1 and pnpm 11.24.0 ([](https://github.com/omnixys/kafka-ts/commit/4faa50d2beaf96487d6dc4f25d927adae64a1a7b))
+
 ## [3.3.1](https://github.com/omnixys/kafka-ts/compare/v3.3.0...v3.3.1) (2026-08-28)
 
 ### Deps
