@@ -33,11 +33,7 @@ import type { Consumer, EachBatchPayload, KafkaMessage } from "kafkajs";
 import { randomUUID } from "node:crypto";
 
 export type KafkaConsumerStatus =
-  | "closing"
-  | "idle"
-  | "running"
-  | "starting"
-  | "stopped";
+  "closing" | "idle" | "running" | "starting" | "stopped";
 
 @Injectable()
 export class KafkaConsumerService
@@ -64,7 +60,10 @@ export class KafkaConsumerService
     private readonly options?: KafkaModuleOptions,
     @Optional() private readonly logger?: OmnixysLogger,
   ) {
-    this.log = this.logger?.log(this.constructor.name);
+    this.log = this.logger?.log(
+      this.constructor.name,
+      "package:@omnixys/kafka-ts",
+    );
   }
 
   onApplicationBootstrap(): Promise<void> {

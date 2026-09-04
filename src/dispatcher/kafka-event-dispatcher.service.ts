@@ -32,7 +32,10 @@ export class KafkaEventDispatcherService implements OnModuleInit {
     private readonly reflector: Reflector,
     @Optional() private readonly logger?: OmnixysLogger,
   ) {
-    this.log = this.logger?.log(this.constructor.name);
+    this.log = this.logger?.log(
+      this.constructor.name,
+      "package:@omnixys/kafka-ts",
+    );
   }
 
   onModuleInit(): void {

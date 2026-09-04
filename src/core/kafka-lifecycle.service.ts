@@ -12,7 +12,10 @@ export class KafkaLifecycleService {
     private readonly consumer: KafkaConsumerService,
     @Optional() private readonly logger?: OmnixysLogger,
   ) {
-    this.log = this.logger?.log(this.constructor.name);
+    this.log = this.logger?.log(
+      this.constructor.name,
+      "package:@omnixys/kafka-ts",
+    );
   }
 
   ready(): boolean {

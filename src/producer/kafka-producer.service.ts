@@ -396,7 +396,10 @@ export class KafkaProducerService implements OnModuleDestroy, OnModuleInit {
 
   private get log(): ReturnType<OmnixysLogger["log"]> | undefined {
     try {
-      this.scopedLog ??= this.logger?.log(KafkaProducerService.name);
+      this.scopedLog ??= this.logger?.log(
+        KafkaProducerService.name,
+        "package:@omnixys/kafka-ts",
+      );
       return this.scopedLog;
     } catch {
       return undefined;
