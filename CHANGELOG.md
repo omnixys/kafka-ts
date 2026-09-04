@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [4.1.0](https://github.com/omnixys/kafka-ts/compare/v4.0.0...v4.1.0) (2026-09-04)
+
+### Log
+
+* **Log:** add logger ([](https://github.com/omnixys/kafka-ts/commit/d137be39f94d20f247bf886a417f6c49c2781348))
+
 ## [4.0.0](https://github.com/omnixys/kafka-ts/compare/v3.3.1...v4.0.0) (2026-09-02)
 
 ### Ci
