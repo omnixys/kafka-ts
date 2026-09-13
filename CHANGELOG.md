@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [4.2.0](https://github.com/omnixys/kafka-ts/compare/v4.1.0...v4.2.0) (2026-09-13)
+
+### Topics
+
+* **Topics:** add new topics ([](https://github.com/omnixys/kafka-ts/commit/168620a2c302d3d21fc6a01ee70cd864732774ab))
+
 ## [4.1.0](https://github.com/omnixys/kafka-ts/compare/v4.0.0...v4.1.0) (2026-09-04)
 
 ### Log
