@@ -42,6 +42,7 @@ export const KafkaTopics = {
     deleteGuest: "invitation.deleteGuest.authentication",
     deleteGuestList: "invitation.deleteGuestList.authentication",
     createGuest: "invitation.createGuest.authentication",
+    requestGuestMagicLink: "invitation.requestGuestMagicLink.authentication",
     loginSucceededFact: "authentication.login.succeeded.v1",
     loginFailedFact: "authentication.login.failed.v1",
     logoutSucceededFact: "authentication.logout.succeeded.v1",
@@ -112,6 +113,7 @@ export const KafkaTopics = {
     // sendCredentials: "authentication.sendCredentials.notification",
     sendRequestReset: "authentication.sendRequestReset.notification",
     sendMagicLink: "authentication.sendMagicLink.notification",
+    sendGuestMagicLink: "authentication.sendGuestMagicLink.notification",
 
     confirmGuest: "invitation.confirmGuest.notification",
     notifyUser: `authentication.notifyRegistration.notification`,

@@ -38,6 +38,8 @@ import type {
   EventRoleRemovedDTO,
   EventUpdatedDTO,
   GuestNotificationDTO,
+  GuestMagicLinkNotificationDTO,
+  GuestMagicLinkRequestDTO,
   InternalConversationCreatedDTO,
   InternalMessageSentDTO,
   InternalReadReceiptDTO,
@@ -148,6 +150,7 @@ export interface KafkaEventRegistry {
   [KafkaTopics.authentication.deleteGuest]: UserIdDTO;
   [KafkaTopics.authentication.deleteGuestList]: UserIdListDTO;
   [KafkaTopics.authentication.createGuest]: CreatePlusOneAccountDTO;
+  [KafkaTopics.authentication.requestGuestMagicLink]: GuestMagicLinkRequestDTO;
 
   [KafkaTopics.event.restart]: ActorIdDTO;
   [KafkaTopics.event.shutdown]: ActorIdDTO;
@@ -186,6 +189,7 @@ export interface KafkaEventRegistry {
 
   [KafkaTopics.notification.sendRequestReset]: SendAuthLinkDTO;
   [KafkaTopics.notification.sendMagicLink]: SendAuthLinkDTO;
+  [KafkaTopics.notification.sendGuestMagicLink]: GuestMagicLinkNotificationDTO;
   [KafkaTopics.notification.notifyUser]: TokenDTO;
   [KafkaTopics.notification.restart]: ActorIdDTO;
   [KafkaTopics.notification.shutdown]: ActorIdDTO;

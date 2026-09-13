@@ -36,3 +36,14 @@ test("event lifecycle facts remain separate from legacy event topics", () => {
     assert.deepEqual(fact?.consumers, ["analytics"]);
   }
 });
+
+test("guest magic-link commands have stable internal topic names", () => {
+  assert.equal(
+    KafkaTopics.authentication.requestGuestMagicLink,
+    "invitation.requestGuestMagicLink.authentication",
+  );
+  assert.equal(
+    KafkaTopics.notification.sendGuestMagicLink,
+    "authentication.sendGuestMagicLink.notification",
+  );
+});
