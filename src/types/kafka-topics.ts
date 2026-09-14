@@ -132,6 +132,9 @@ export const KafkaTopics = {
 
     addGuestId: `user.addGuestId.seat`,
     removeGuestId: `user.deleteGuestId.seat`,
+    reserve: "seat.reserve",
+    reserved: "seat.reserved",
+    reservationFailed: "seat.reservationFailed",
     assignedFact: "seat.assigned.v1",
     changedFact: "seat.changed.v1",
     unassignedFact: "seat.unassigned.v1",
@@ -407,7 +410,30 @@ export const KafkaTopicMetadataRegistry = {
     "rsvpUpdatedFact",
   ]),
   notification: factMetadata("notification", ["deliveredFact", "failedFact"]),
-  seat: factMetadata("seat", ["assignedFact", "changedFact", "unassignedFact"]),
+  seat: {
+    ...factMetadata("seat", ["assignedFact", "changedFact", "unassignedFact"]),
+    reserve: {
+      owner: "invitation",
+      description: "Request a seat reservation for an approved invitation.",
+      policy: "default",
+      producers: ["invitation"],
+      consumers: ["seat"],
+    },
+    reserved: {
+      owner: "seat",
+      description: "Confirm that a seat was reserved for an invitation.",
+      policy: "default",
+      producers: ["seat"],
+      consumers: ["invitation"],
+    },
+    reservationFailed: {
+      owner: "seat",
+      description: "Report that no seat could be reserved for an invitation.",
+      policy: "default",
+      producers: ["seat"],
+      consumers: ["invitation"],
+    },
+  },
   ticket: factMetadata("ticket", [
     "generatedFact",
     "revokedFact",

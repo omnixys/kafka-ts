@@ -47,3 +47,18 @@ test("guest magic-link commands have stable internal topic names", () => {
     "authentication.sendGuestMagicLink.notification",
   );
 });
+
+test("guest seat reservation topics are part of the reconciled catalog", () => {
+  const catalog = getKafkaTopicCatalog();
+  const expectations = [
+    [KafkaTopics.seat.reserve, "invitation", "seat"],
+    [KafkaTopics.seat.reserved, "seat", "invitation"],
+    [KafkaTopics.seat.reservationFailed, "seat", "invitation"],
+  ];
+
+  for (const [topic, producer, consumer] of expectations) {
+    const entry = catalog.topics.find((candidate) => candidate.topic === topic);
+    assert.deepEqual(entry?.producers, [producer]);
+    assert.deepEqual(entry?.consumers, [consumer]);
+  }
+});
