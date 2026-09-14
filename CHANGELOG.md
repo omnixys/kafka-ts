@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [4.3.0](https://github.com/omnixys/kafka-ts/compare/v4.2.0...v4.3.0) (2026-09-14)
+
+### Topics
+
+* **Topics:** add seat reservation topics ([](https://github.com/omnixys/kafka-ts/commit/84fb0f3cb9b184c6c68d6aca2061a34150792313))
+
 ## [4.2.0](https://github.com/omnixys/kafka-ts/compare/v4.1.0...v4.2.0) (2026-09-13)
 
 ### Topics
