@@ -3,6 +3,12 @@
 All notable changes in this project will be documented in this file.
 
 
+## [4.3.1](https://github.com/omnixys/kafka-ts/compare/v4.3.0...v4.3.1) (2026-09-19)
+
+### Deps
+
+* **Deps:** update omnixys contracts-ts package ([](https://github.com/omnixys/kafka-ts/commit/5b236e84f32cfd1fb836113fc87a9059bd0b3f7d))
+
 ## [4.3.0](https://github.com/omnixys/kafka-ts/compare/v4.2.0...v4.3.0) (2026-09-14)
 
 ### Topics
